@@ -11,6 +11,9 @@ import { LocalWeatherPage } from "../pages/local-weather/local-weather";
 
 import { LoginProvider } from "../providers/login/login";
 
+import { PincodePage } from "../pages/pincode/pincode";
+import { FingerprintPage } from "../pages/fingerprint/fingerprint";
+
 export interface MenuItem {
     title: string;
     component: any;
@@ -24,7 +27,7 @@ export interface MenuItem {
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
-  rootPage: any = LoginPage;
+  rootPage: any ;
 
   appMenuItems: Array<MenuItem>;
 
@@ -35,9 +38,16 @@ export class MyApp {
     public loginProvider:LoginProvider
     // public keyboard: Keyboard
   ) {
-    // this.loginProvider.loginService()
-    this.initializeApp();
+    // this.loginProvider.loginService() set_login_pincode,set_login_userpass,set_login_fingerprint
+    
+    if( this.loginProvider.checkLogin('set_login_pincode') == "Y" ){
+        this.rootPage = PincodePage
+    }else{
+        this.rootPage = LoginPage
+    }
 
+
+    this.initializeApp();
     this.appMenuItems = [
       {title: 'Home', component: HomePage, icon: 'home'},
       {title: 'Local Weather', component: LocalWeatherPage, icon: 'partly-sunny'}

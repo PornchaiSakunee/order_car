@@ -25,6 +25,9 @@ import {TripDetailPage} from "../pages/trip-detail/trip-detail";
 import {TripsPage} from "../pages/trips/trips";
 import {LocalWeatherPage} from "../pages/local-weather/local-weather";
 import { LoginProvider } from '../providers/login/login';
+//page
+import { FingerprintPage } from "../pages/fingerprint/fingerprint";
+import { PincodePage } from "../pages/pincode/pincode";
 
 // import services
 // end import services
@@ -45,7 +48,9 @@ import { LoginProvider } from '../providers/login/login';
     RegisterPage,
     SearchLocationPage,
     TripDetailPage,
-    TripsPage
+    TripsPage,
+    FingerprintPage,
+    PincodePage
   ],
   imports: [
     BrowserModule,
@@ -72,7 +77,9 @@ import { LoginProvider } from '../providers/login/login';
     RegisterPage,
     SearchLocationPage,
     TripDetailPage,
-    TripsPage
+    TripsPage,
+    FingerprintPage,
+    PincodePage
   ],
   providers: [
     StatusBar,
