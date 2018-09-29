@@ -3,11 +3,13 @@ import { Platform, Nav } from "ionic-angular";
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
-import { Keyboard } from '@ionic-native/keyboard';
+// import { Keyboard } from '@ionic-native/keyboard';
 
 import { HomePage } from "../pages/home/home";
 import { LoginPage } from "../pages/login/login";
 import { LocalWeatherPage } from "../pages/local-weather/local-weather";
+
+import { LoginProvider } from "../providers/login/login";
 
 export interface MenuItem {
     title: string;
@@ -30,8 +32,10 @@ export class MyApp {
     public platform: Platform,
     public statusBar: StatusBar,
     public splashScreen: SplashScreen,
-    public keyboard: Keyboard
+    public loginProvider:LoginProvider
+    // public keyboard: Keyboard
   ) {
+    // this.loginProvider.loginService()
     this.initializeApp();
 
     this.appMenuItems = [
@@ -53,7 +57,7 @@ export class MyApp {
       this.statusBar.overlaysWebView(false);
 
       //*** Control Keyboard
-      this.keyboard.disableScroll(true);
+      // this.keyboard.disableScroll(true);
     });
   }
 

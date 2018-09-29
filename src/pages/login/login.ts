@@ -2,14 +2,21 @@ import {Component} from "@angular/core";
 import {NavController, AlertController, ToastController, MenuController} from "ionic-angular";
 import {HomePage} from "../home/home";
 import {RegisterPage} from "../register/register";
+import { LoginProvider } from "../../providers/login/login";
 
 @Component({
   selector: 'page-login',
   templateUrl: 'login.html'
 })
 export class LoginPage {
-
-  constructor(public nav: NavController, public forgotCtrl: AlertController, public menu: MenuController, public toastCtrl: ToastController) {
+  todologin = { username: '', password: '' };
+  constructor(
+    public nav: NavController, 
+    public forgotCtrl: AlertController, 
+    public menu: MenuController, 
+    public toastCtrl: ToastController,
+    public loginProvider:LoginProvider
+  ) {
     this.menu.swipeEnable(false);
   }
 
@@ -20,7 +27,8 @@ export class LoginPage {
 
   // login and go to home page
   login() {
-    this.nav.setRoot(HomePage);
+    this.loginProvider.loginService(this.todologin.username,this.todologin.password)
+    // this.nav.setRoot(HomePage);
   }
 
   forgotPass() {
