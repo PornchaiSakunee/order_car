@@ -28,6 +28,11 @@ import { LoginProvider } from '../providers/login/login';
 //page
 import { FingerprintPage } from "../pages/fingerprint/fingerprint";
 import { PincodePage } from "../pages/pincode/pincode";
+import { LoginPinPage } from "../pages/login-pin/login-pin";
+//provider
+import { StorageGetProvider } from '../providers/storage-get/storage-get';
+
+// import { PincodeConfrimPage } from "../pages/pincode-confrim/pincode-confrim";
 
 // import services
 // end import services
@@ -50,7 +55,9 @@ import { PincodePage } from "../pages/pincode/pincode";
     TripDetailPage,
     TripsPage,
     FingerprintPage,
-    PincodePage
+    PincodePage,
+    LoginPinPage,
+    
   ],
   imports: [
     BrowserModule,
@@ -79,7 +86,8 @@ import { PincodePage } from "../pages/pincode/pincode";
     TripDetailPage,
     TripsPage,
     FingerprintPage,
-    PincodePage
+    PincodePage,
+    LoginPinPage,
   ],
   providers: [
     StatusBar,
@@ -88,7 +96,8 @@ import { PincodePage } from "../pages/pincode/pincode";
     ActivityService,
     TripService,
     WeatherProvider,
-    LoginProvider
+    LoginProvider,
+    StorageGetProvider
   ]
 })
 

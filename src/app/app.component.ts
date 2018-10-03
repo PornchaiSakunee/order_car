@@ -11,8 +11,10 @@ import { LocalWeatherPage } from "../pages/local-weather/local-weather";
 
 import { LoginProvider } from "../providers/login/login";
 
-import { PincodePage } from "../pages/pincode/pincode";
+// import { PincodePage } from "../pages/pincode/pincode";
+import { LoginPinPage } from "../pages/login-pin/login-pin";
 import { FingerprintPage } from "../pages/fingerprint/fingerprint";
+import { Storage } from '@ionic/storage';
 
 export interface MenuItem {
     title: string;
@@ -35,17 +37,23 @@ export class MyApp {
     public platform: Platform,
     public statusBar: StatusBar,
     public splashScreen: SplashScreen,
-    public loginProvider:LoginProvider
+    public loginProvider:LoginProvider,
+    public storage:Storage
     // public keyboard: Keyboard
   ) {
     // this.loginProvider.loginService() set_login_pincode,set_login_userpass,set_login_fingerprint
+    this.storage.get('set_pin_id').then((data_pin_id) => {
     
-    if( this.loginProvider.checkLogin('set_login_pincode') == "Y" ){
-        this.rootPage = PincodePage
-    }else{
+     
+      if(data_pin_id != null){
+        //  ถ้ามีการตั้งค่าเป็น
+        this.rootPage = LoginPinPage
+       }else{
         this.rootPage = LoginPage
-    }
-
+       }
+    },(error)=>{
+      this.rootPage = LoginPage
+    });
 
     this.initializeApp();
     this.appMenuItems = [

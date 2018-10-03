@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { Storage } from '@ionic/storage';
 
 /**
  * Generated class for the FingerprintPage page.
@@ -15,7 +16,15 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class FingerprintPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  pincode:any ;
+
+  constructor(public navCtrl: NavController, public navParams: NavParams, public storage: Storage) {
+    this.storage.get('set_pin_id').then((val_pin_code) => {
+      console.log('pin'+val_pin_code);
+      
+      this.pincode = val_pin_code ;
+    });
+   
   }
 
   ionViewDidLoad() {
