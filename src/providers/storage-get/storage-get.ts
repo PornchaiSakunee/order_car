@@ -12,21 +12,37 @@ import { Storage } from '@ionic/storage';
 @Injectable()
 export class StorageGetProvider {
 
+  public set_emp_code:string;
+  public set_emp_Fname:string = "pornchai";
+  public set_emp_Lname:string;
+
   constructor(public storage:Storage) {
     console.log('Hello StorageGetProvider Provider');
+    this.storage_set();
     
   }
   
-  // storage_get(key:string){
- 
-  //   return new Promise(resolve => { this.storage.get('set_fist_time').then((val) => {
-  //     console.log(val);
-  //     resolve(val);
- 
-  //   });
-  // });
+  storage_set(){
+
+    this.storage.get('set_emp_code').then((val) => {
+      this.set_emp_code= val ;
+    });
+
+    this.storage.get('set_emp_Fname').then((val) => {
+      this.set_emp_Fname= val ;
+    });
+    this.storage.get('set_emp_Lname').then((val) => {
+      this.set_emp_Lname= val ;
+    });
+
+
     
-  // }
+  }
+
+  storage_get(){
+      return this.set_emp_Fname
+  }
+  
 
   // getMovieItems() {
   //   return new Promise(resolve => {

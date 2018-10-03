@@ -48,6 +48,10 @@ export class LoginPage {
         // JSON.parse(data);
         // login สำเร็จ
         if (data['emp_code'] != 0) {
+          //set local storage 
+          this.storage.set('set_emp_code', data['emp_code'] );
+          this.storage.set('set_emp_Fname', data['emp_Fname'] );
+          this.storage.set('set_emp_Lname', data['emp_Lname'] );
           //เช็คว่าล็อกอินครั้งแรกหรือไม
           //  this.storage.set('set_fist_time', 'n');
           this.storage.get('set_fist_time').then((data_fist) => {

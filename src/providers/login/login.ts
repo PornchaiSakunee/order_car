@@ -15,6 +15,7 @@ import { StorageGetProvider } from "../storage-get/storage-get";
 @Injectable()
 export class LoginProvider {
 
+ 
   baseUrl: string = "https://intranet.spi.co.th/booking_car/service/"
 
   constructor(
@@ -24,25 +25,7 @@ export class LoginProvider {
   ) {
     console.log('Hello LoginProvider Provider');
   }
-
-  checkLogin(titlesset: string): any {
-    // return this.storageGetProvider.storage_get(titlesset);
-    this.storage.get(titlesset).then((val) => {
-      return val
-    });
-  }
-
-  // //เช็คล็อกอิรครั้งแรก
-  // firstTime(){
-  //   this.storage.get('age').then((val) => {
-
-  //     if(){
-
-  //     }
-  //     console.log('Your age is', val);
-  //   });
-  // }
-
+  
   loginService(username: string, password: string) {
 
     ////login.ts
@@ -56,5 +39,7 @@ export class LoginProvider {
       });
     });
   }
+
+
 
 }

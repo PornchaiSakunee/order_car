@@ -27,9 +27,9 @@ export class LoginPinPage {
   message: any;
   finalPin: any;
   fingerPin: any;
-  
 
-  constructor(public navCtrl: NavController, public navParams: NavParams,public storage:Storage) {
+
+  constructor(public navCtrl: NavController, public navParams: NavParams, public storage: Storage) {
 
 
 
@@ -66,8 +66,8 @@ export class LoginPinPage {
 
       // if (this.passcode.length == 4) {
       //   this.storage.get('set_pin_id').then((data_pin_id) => {
-    
-     
+
+
       //     if(data_pin_id == this.passcode ){
       //       //  ถ้ามีการตั้งค่าเป็น
       //       this.navCtrl.setRoot(HomePage);
@@ -77,7 +77,7 @@ export class LoginPinPage {
       //     //  }
       //   },(error)=>{
       //      console.log(error);
-           
+
       //   });
       // }
     }
@@ -87,72 +87,80 @@ export class LoginPinPage {
   check_pin(value) {
 
 
-      if (this.passcode.length < 4) {
-        this.passcode = this.passcode + value;
-        if (this.int == 0) {
-          this.codeone = value;
-          this.int++
-        } else if (this.int == 1) {
-          this.codetwo = value;
-          this.int++
-        } else if (this.int == 2) {
-          this.codethree = value;
-          this.int++
-        } else if (this.int == 3) {
-          this.codefour = value;
-          this.int++
-        }
+    if (this.passcode.length < 4) {
+      this.passcode = this.passcode + value;
+      if (this.int == 0) {
+        this.codeone = value;
+        this.int++
+      } else if (this.int == 1) {
+        this.codetwo = value;
+        this.int++
+      } else if (this.int == 2) {
+        this.codethree = value;
+        this.int++
+      } else if (this.int == 3) {
+        this.codefour = value;
+        this.int++
+      }
+
+      if (this.passcode.length == 4) {
+        console.log("pin"+this.passcode);
         
-          if (this.passcode.length == 4) {
         this.storage.get('set_pin_id').then((data_pin_id) => {
-    
-         //  ถ้าpin ตรงกัน ไปที่หน้า home
-          if(data_pin_id == this.passcode ){
+        console.log("set_p"+data_pin_id);
+        
+          //  ถ้าpin ตรงกัน ไปที่หน้า home
+          if (data_pin_id == this.passcode) {
             this.message = true;
             this.navCtrl.setRoot(HomePage);
-           }
-           else{
+          }
+          else {
             this.message = false;
-            // this.rootPage = LoginPage
-           }
-        },(error)=>{
-           console.log(error);
-           
+            this.codeone = null;
+            this.codetwo = null;
+            this.codethree = null;
+            this.codefour = null;
+            this.passcode = '';
+            this.int = 0
+          }
+        }, (error) => {
+          console.log(error);
+
         });
       }
 
 
-        // if (this.passcode.length == 4) {
-        //   if (this.newPincount > 0) {
-        //     if (this.finalPin == this.codeone + this.codetwo + this.codethree + this.codefour) {
-        //       this.navCtrl.setRoot(HomePage).then(() => {
-        //         //ถ้าตั้ง pin สำเร็จ ให้ set pin id 
-        //         this.storage.set('set_pin_id', this.finalPin)
-        //       });
+      // if (this.passcode.length == 4) {
+      //   if (this.newPincount > 0) {
+      //     if (this.finalPin == this.codeone + this.codetwo + this.codethree + this.codefour) {
+      //       this.navCtrl.setRoot(HomePage).then(() => {
+      //         //ถ้าตั้ง pin สำเร็จ ให้ set pin id 
+      //         this.storage.set('set_pin_id', this.finalPin)
+      //       });
 
 
 
-        //       console.log("passwordMatched")
-        //       this.message = true;
-        //     } else {
-        //       this.message = false;
-        //     }
-        //   } else {
-        //     this.pageStatus = "Confirm Pin"
-        //     this.newPincount++
-        //     this.finalPin = this.codeone + this.codetwo + this.codethree + this.codefour
-        //     console.log("The four digit code was entered", this.finalPin);
-        //     this.codeone = null;
-        //     this.codetwo = null;
-        //     this.codethree = null;
-        //     this.codefour = null;
-        //     this.passcode = '';
-        //     this.int = 0
+      //       console.log("passwordMatched")
+      //       this.message = true;
+      //     } else {
+      //       this.message = false;
+      //     }
+      //   } else {
+      //     this.pageStatus = "Confirm Pin"
+      //     this.newPincount++
+      //     this.finalPin = this.codeone + this.codetwo + this.codethree + this.codefour
+      //     console.log("The four digit code was entered", this.finalPin);
+      //     this.codeone = null;
+      //     this.codetwo = null;
+      //     this.codethree = null;
+      //     this.codefour = null;
+      //     this.passcode = '';
+      //     this.int = 0
 
-        //   }
-        // }
-      }
-    
+      //   }
+      // }
+    }
+
   }
 
   delete() {

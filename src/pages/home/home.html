@@ -23,7 +23,10 @@
   <ion-card no-margin margin-bottom class="full-width">
     <ion-item tappable (click)="choosePlace('from')" class="border-bottom">
       <ion-icon name="search" color="primary" item-left></ion-icon>
-      <span>{{ search.name }}</span>
+      
+
+
+      <span>{{ search.set_emp_code }}{{ search.set_emp_Fname }}{{ search.set_emp_Lname }}</span>
     </ion-item>
     <ion-item>
       <ion-icon name="md-calendar" color="primary" item-left></ion-icon>

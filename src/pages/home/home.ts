@@ -6,6 +6,7 @@ import {NotificationsPage} from "../notifications/notifications";
 import {SettingsPage} from "../settings/settings";
 import {TripsPage} from "../trips/trips";
 import {SearchLocationPage} from "../search-location/search-location";
+// import { LoginProvider } from "../../providers/login/login";
 
 
 @Component({
@@ -19,6 +20,11 @@ export class HomePage {
     name: "Rio de Janeiro, Brazil",
     date: new Date().toISOString()
   }
+
+  set_emp_code:string;
+  set_emp_Fname:string = "pornchai";
+  set_emp_Lname:string = "sakunee";
+
 
   constructor(private storage: Storage, public nav: NavController, public popoverCtrl: PopoverController) {
   }

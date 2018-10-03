@@ -5,6 +5,8 @@ import { Storage } from '@ionic/storage';
 
 // import { PincodeConfrimPage } from "../pincode-confrim/pincode-confrim";
 import { FingerprintPage } from "../fingerprint/fingerprint";
+import { FingerprintAIO } from '@ionic-native/fingerprint-aio';
+import { HomePage } from "../home/home";
 
 /**
  * Generated class for the PincodePage page.
@@ -30,13 +32,16 @@ export class PincodePage {
   message: any;
   finalPin: any;
   fingerPin: any;
+  page_:any = HomePage
 
   constructor(
     // public faio: FingerprintAIO,
     public toastCtrl: ToastController,
     public navCtrl: NavController,
     public navParams: NavParams,
-    public storage: Storage) {
+    public storage: Storage,
+    public faio:FingerprintAIO
+  ) {
     this.passcode = '';
     this.finalPin = '';
     this.message = true;
@@ -68,11 +73,22 @@ export class PincodePage {
           this.codefour = value;
           this.int++
         }
-        
+
         if (this.passcode.length == 4) {
           if (this.newPincount > 0) {
             if (this.finalPin == this.codeone + this.codetwo + this.codethree + this.codefour) {
-              this.navCtrl.setRoot(FingerprintPage).then(() => {
+
+             
+
+              // เช็คว่าเครื่องสามารถสแกนนิ้วได้หรือไม่
+              this.faio.isAvailable().then(result => {
+                if (result === "OK") {
+                  this.page_ = FingerprintPage
+                  console.log('มีแสกนนิ้ว หน้า login page');
+                  
+                }
+              });
+              this.navCtrl.setRoot(this.page_).then(() => {
                 //ถ้าตั้ง pin สำเร็จ ให้ set pin id 
                 this.storage.set('set_pin_id', this.finalPin)
               });

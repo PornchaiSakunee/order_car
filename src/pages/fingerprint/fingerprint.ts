@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
+import { FingerprintAIO } from '@ionic-native/fingerprint-aio';
 
 /**
  * Generated class for the FingerprintPage page.
@@ -16,15 +17,28 @@ import { Storage } from '@ionic/storage';
 })
 export class FingerprintPage {
 
-  pincode:any ;
+  pincode: any;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public storage: Storage) {
-    this.storage.get('set_pin_id').then((val_pin_code) => {
-      console.log('pin'+val_pin_code);
-      
-      this.pincode = val_pin_code ;
+  constructor(
+    public navCtrl: NavController,
+    public navParams: NavParams,
+    public storage: Storage,
+    private faio: FingerprintAIO
+  ) {
+
+    this.faio.isAvailable().then(result => {
+      if (result === "OK") {
+        console.log('มีแสกนนิ้ว');
+        
+      }
     });
-   
+
+
+    // this.storage.get('set_pin_id').then((val_pin_code) => {
+    //   console.log('pin'+val_pin_code);
+    //   this.pincode = val_pin_code ;
+    // });
+
   }
 
   ionViewDidLoad() {
