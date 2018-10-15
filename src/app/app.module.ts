@@ -33,6 +33,8 @@ import { OrderOutPage } from "../pages/order-out/order-out";
 //provider
 import { StorageGetProvider } from '../providers/storage-get/storage-get';
 import { Camera } from '@ionic-native/camera';
+// import { NgProgressModule } from '@ngx-progressbar/core';
+
 // import { PincodeConfrimPage } from "../pages/pincode-confrim/pincode-confrim";
 
 // import services
@@ -72,7 +74,8 @@ import { Camera } from '@ionic-native/camera';
     IonicStorageModule.forRoot({
       name: '__ionic3_start_theme',
         driverOrder: ['indexeddb', 'sqlite', 'websql']
-    })
+    }),
+    // NgProgressModule.forRoot()
   ],
   bootstrap: [IonicApp],
   entryComponents: [

@@ -46,5 +46,27 @@
       </ion-col>
       
     </ion-row>
+    <ion-row>
+      <ion-col col-12>
+ 
+ 
+  <button ion-button full (click)="getPicture()">OCR Image</button>
+  <!-- <button ion-button full (click)="recognizeImage()" [disabled]="!selectedImage">Recognize Image</button> -->
+ 
+  <!-- <img [src]="selectedImage" *ngIf="selectedImage"> -->
+  <p>{{progressBar}}</p>
+  <p>Error : {{textErr}}</p>
+ 
+  <ion-card *ngIf="imageText">
+    <ion-card-header>
+      Image Text
+    </ion-card-header>
+    <ion-card-content>
+      {{ imageText }}
+    </ion-card-content>
+  </ion-card>
+</ion-col>
+      
+</ion-row>
   </ion-grid>
 </ion-content>

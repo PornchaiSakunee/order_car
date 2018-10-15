@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams,AlertController } from 'ionic-angular';
-import { Camera, CameraOptions } from '@ionic-native/camera';
-// import * as Tesseract from 'tesseract.js'
+import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
+import { Camera, CameraOptions, PictureSourceType } from '@ionic-native/camera';
+import * as Tesseract from 'tesseract.js'
 // import { NgProgress } from '@ngx-progressbar/core';
 
 /**
@@ -17,15 +17,25 @@ import { Camera, CameraOptions } from '@ionic-native/camera';
   templateUrl: 'order-out.html',
 })
 export class OrderOutPage {
-  public photos : any;
-  public base64Image : string;
-  constructor(public navCtrl: NavController, public navParams: NavParams,public camera:Camera,private alertCtrl : AlertController) {
+  photos: any;
+  base64Image: string;
+  progressBar: any;
+  imageText: string;
+  textErr:any;
+
+  constructor(
+    public navCtrl: NavController,
+    public navParams: NavParams,
+    public camera: Camera,
+    private alertCtrl: AlertController,
+    // public progress: NgProgress
+  ) {
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad OrderOutPage');
   }
-  
+
   ngOnInit() {
     this.photos = [];
   }
@@ -49,22 +59,55 @@ export class OrderOutPage {
         }
       ]
     });
-  confirm.present();
+    confirm.present();
   }
 
   takePhoto() {
-    const options : CameraOptions = {
+    const options: CameraOptions = {
       quality: 50, // picture quality
       destinationType: this.camera.DestinationType.DATA_URL,
       encodingType: this.camera.EncodingType.JPEG,
       mediaType: this.camera.MediaType.PICTURE
     }
-    this.camera.getPicture(options) .then((imageData) => {
-        this.base64Image = "data:image/jpeg;base64," + imageData;
-        this.photos.push(this.base64Image);
-        this.photos.reverse();
-      }, (err) => {
-        console.log(err);
+    this.camera.getPicture(options).then((imageData) => {
+      this.base64Image = "data:image/jpeg;base64," + imageData;
+      this.photos.push(this.base64Image);
+      this.photos.reverse();
+    }, (err) => {
+      console.log(err);
+    });
+  }
+
+  getPicture(sourceType: PictureSourceType) {
+    this.camera.getPicture({
+      quality: 100,
+      destinationType: this.camera.DestinationType.DATA_URL,
+      sourceType: sourceType,
+      allowEdit: true,
+      saveToPhotoAlbum: false,
+      correctOrientation: true
+    }).then((imageData) => {
+      this.recognizeImage(`data:image/jpeg;base64,${imageData}`);
+    });
+  }
+
+  recognizeImage(selectedImage: string) {
+    Tesseract.recognize(selectedImage)
+      .progress(message => {
+        if (message.status === 'recognizing text')
+          // this.progress.set(message.progress);
+          console.log(message.progress);
+          this.progressBar = message.progress ;
+
+      })
+      .catch(err => console.error(err))
+      .then(result => {
+        this.imageText = result.text;
+      })
+      .finally(resultOrError => {
+        // this.progress.complete();
+        this.textErr = resultOrError;
+        console.log(resultOrError);
       });
   }
   // getPicture(sourceType: PictureSourceType) {
