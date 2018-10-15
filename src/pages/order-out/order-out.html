@@ -1,0 +1,50 @@
+<!--
+  Generated template for the OrderOutPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>order_out</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <ion-grid>
+    <ion-row>
+      <ion-col col-12>วันที่ : 12/10/2561</ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col col-12>เวลา : 07:30</ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col col-12>ปลายทาง : ไปใหน</ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col col-12>การใช้งาน : กทม</ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col col-12>
+        <button ion-button full (click)="takePhoto()" >
+          <ion-icon name="camera"></ion-icon>Take Photo
+          </button>
+        
+          <ion-grid>
+            <ion-row>
+              <ion-col col-6 *ngFor="let photo of photos; let id = index">
+                <ion-card class="block">
+                  <ion-icon name="trash" class="deleteIcon" (click)="deletePhoto(id)"></ion-icon>
+                  <img [src]="photo" *ngIf="photo" />
+                </ion-card>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+      </ion-col>
+      
+    </ion-row>
+  </ion-grid>
+</ion-content>

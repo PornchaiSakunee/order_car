@@ -19,6 +19,7 @@
     "@angular/http": "4.4.4",
     "@angular/platform-browser": "4.4.4",
     "@angular/platform-browser-dynamic": "4.4.4",
+    "@ionic-native/camera": "^4.15.0",
     "@ionic-native/core": "3.12.1",
     "@ionic-native/device": "^4.2.1",
     "@ionic-native/fingerprint-aio": "^4.15.0",
@@ -59,7 +60,8 @@
       "ionic-plugin-keyboard": {},
       "cordova-plugin-splashscreen": {},
       "cordova-sqlite-storage": {},
-      "cordova-plugin-fingerprint-aio": {}
+      "cordova-plugin-fingerprint-aio": {},
+      "cordova-plugin-camera": {}
     },
     "platforms": [
       "android",

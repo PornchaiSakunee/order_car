@@ -29,9 +29,10 @@ import { LoginProvider } from '../providers/login/login';
 import { FingerprintPage } from "../pages/fingerprint/fingerprint";
 import { PincodePage } from "../pages/pincode/pincode";
 import { LoginPinPage } from "../pages/login-pin/login-pin";
+import { OrderOutPage } from "../pages/order-out/order-out";
 //provider
 import { StorageGetProvider } from '../providers/storage-get/storage-get';
-
+import { Camera } from '@ionic-native/camera';
 // import { PincodeConfrimPage } from "../pages/pincode-confrim/pincode-confrim";
 
 // import services
@@ -57,6 +58,7 @@ import { StorageGetProvider } from '../providers/storage-get/storage-get';
     FingerprintPage,
     PincodePage,
     LoginPinPage,
+    OrderOutPage,
     
   ],
   imports: [
@@ -88,6 +90,7 @@ import { StorageGetProvider } from '../providers/storage-get/storage-get';
     FingerprintPage,
     PincodePage,
     LoginPinPage,
+    OrderOutPage,
   ],
   providers: [
     StatusBar,
@@ -97,7 +100,8 @@ import { StorageGetProvider } from '../providers/storage-get/storage-get';
     TripService,
     WeatherProvider,
     LoginProvider,
-    StorageGetProvider
+    StorageGetProvider,
+    Camera
   ]
 })
 

@@ -6,6 +6,7 @@ import {NotificationsPage} from "../notifications/notifications";
 import {SettingsPage} from "../settings/settings";
 import {TripsPage} from "../trips/trips";
 import {SearchLocationPage} from "../search-location/search-location";
+import { OrderOutPage } from "../order-out/order-out";
 // import { LoginProvider } from "../../providers/login/login";
 
 
@@ -46,6 +47,10 @@ export class HomePage {
   // go to result page
   doSearch() {
     this.nav.push(TripsPage);
+  }
+
+  goOrderOut(){
+    this.nav.push(OrderOutPage);
   }
 
   // choose place
