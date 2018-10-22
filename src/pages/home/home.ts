@@ -1,13 +1,14 @@
-import {Component} from "@angular/core";
-import {NavController, PopoverController} from "ionic-angular";
-import {Storage} from '@ionic/storage';
+import { Component } from "@angular/core";
+import { NavController, PopoverController } from "ionic-angular";
+import { Storage } from '@ionic/storage';
 
-import {NotificationsPage} from "../notifications/notifications";
-import {SettingsPage} from "../settings/settings";
-import {TripsPage} from "../trips/trips";
-import {SearchLocationPage} from "../search-location/search-location";
+import { NotificationsPage } from "../notifications/notifications";
+import { SettingsPage } from "../settings/settings";
+import { TripsPage } from "../trips/trips";
+import { SearchLocationPage } from "../search-location/search-location";
 import { OrderOutPage } from "../order-out/order-out";
-// import { LoginProvider } from "../../providers/login/login";
+import { HttpResponseProvider } from "../../providers/http-response/http-response";
+
 
 
 @Component({
@@ -22,12 +23,34 @@ export class HomePage {
     date: new Date().toISOString()
   }
 
-  set_emp_code:string;
-  set_emp_Fname:string = "pornchai";
-  set_emp_Lname:string = "sakunee";
+  set_emp_code: any;
+  set_emp_Fname: string = "pornchai";
+  set_emp_Lname: string = "sakunee";
+  bt_order:string;
+  // เก็บข้อมูลใบนำรถออก
+  dataHTTP:any
+
+  constructor(private storage: Storage, public nav: NavController, public popoverCtrl: PopoverController, public httpResponseProvider: HttpResponseProvider) {
+    
+    storage.get('set_emp_code').then((val) => {
+      this.set_emp_code = val
+      httpResponseProvider.HTTPService('check_order_out.php', { emp_code: val }).then(data => {
+       
+        
+        if (data['status']  == 1) {
+            this.dataHTTP = data ;
+           this.bt_order = '<button ion-button icon-start block no-margin color="primary" class="round" tappable (click)="goOrderOut()"><ion-icon name="ios-paper-outline"></ion-icon> order</button>';
+        }else{
+          this.bt_order = "!ไม่พบใบนนำรถออก";
+        }
+
+      })
+
+    });
+    // this.storage.get('set_emp_code').then((data)=>{this.set_emp_code=data;})
+    // console.log(this.set_emp_code);
 
 
-  constructor(private storage: Storage, public nav: NavController, public popoverCtrl: PopoverController) {
   }
 
   ionViewWillEnter() {
@@ -49,8 +72,10 @@ export class HomePage {
     this.nav.push(TripsPage);
   }
 
-  goOrderOut(){
-    this.nav.push(OrderOutPage);
+  goOrderOut() {
+    
+    this.nav.push(OrderOutPage,this.dataHTTP);
+    // this.nav.push(OrderOutPage);
   }
 
   // choose place

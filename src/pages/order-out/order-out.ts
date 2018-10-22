@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
+import { Component,ViewChild } from '@angular/core';
 import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
 import { Camera, CameraOptions, PictureSourceType } from '@ionic-native/camera';
 import * as Tesseract from 'tesseract.js'
+import {SignaturePad} from 'angular2-signaturepad/signature-pad';
 // import { NgProgress } from '@ngx-progressbar/core';
 
 /**
@@ -17,6 +18,16 @@ import * as Tesseract from 'tesseract.js'
   templateUrl: 'order-out.html',
 })
 export class OrderOutPage {
+
+  @ViewChild(SignaturePad) public signaturePad : SignaturePad;
+
+  public signaturePadOptions : Object = {
+    'minWidth': 2,
+    'canvasWidth': 340,
+    'canvasHeight': 200
+  };
+  public signatureImage : string;
+
   photos: any;
   base64Image: string;
   progressBar: any;
@@ -28,6 +39,7 @@ export class OrderOutPage {
     public navParams: NavParams,
     public camera: Camera,
     private alertCtrl: AlertController,
+
     // public progress: NgProgress
   ) {
   }
@@ -109,6 +121,11 @@ export class OrderOutPage {
         this.textErr = resultOrError;
         console.log(resultOrError);
       });
+  }
+
+  
+  drawClear() {
+    this.signaturePad.clear();
   }
   // getPicture(sourceType: PictureSourceType) {
   //   this.camera.getPicture({

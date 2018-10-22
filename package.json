@@ -28,6 +28,7 @@
     "@ionic-native/status-bar": "3.12.1",
     "@ionic/storage": "^2.0.1",
     "@ngx-progressbar/core": "^5.2.0",
+    "angular2-signaturepad": "^2.8.0",
     "cordova-android": "6.3.0",
     "cordova-ios": "^4.4.0",
     "cordova-plugin-console": "^1.1.0",

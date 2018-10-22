@@ -33,6 +33,9 @@ import { OrderOutPage } from "../pages/order-out/order-out";
 //provider
 import { StorageGetProvider } from '../providers/storage-get/storage-get';
 import { Camera } from '@ionic-native/camera';
+
+import { SignaturePadModule } from 'angular2-signaturepad';
+import { HttpResponseProvider } from '../providers/http-response/http-response';
 // import { NgProgressModule } from '@ngx-progressbar/core';
 
 // import { PincodeConfrimPage } from "../pages/pincode-confrim/pincode-confrim";
@@ -66,6 +69,7 @@ import { Camera } from '@ionic-native/camera';
   imports: [
     BrowserModule,
     HttpClientModule,
+    SignaturePadModule,
     IonicModule.forRoot(MyApp, {
       scrollPadding: false,
       scrollAssist: true,
@@ -104,7 +108,8 @@ import { Camera } from '@ionic-native/camera';
     WeatherProvider,
     LoginProvider,
     StorageGetProvider,
-    Camera
+    Camera,
+    HttpResponseProvider
   ]
 })
 

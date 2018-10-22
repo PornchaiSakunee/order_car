@@ -5,6 +5,7 @@ import 'rxjs/add/operator/map';
 import { Storage } from '@ionic/storage';
 
 import { StorageGetProvider } from "../storage-get/storage-get";
+import { HttpResponseProvider } from "../http-response/http-response"
 
 /*
   Generated class for the LoginProvider provider.
@@ -16,30 +17,22 @@ import { StorageGetProvider } from "../storage-get/storage-get";
 export class LoginProvider {
 
  
-  baseUrl: string = "https://intranet.spi.co.th/booking_car/service/"
+  // baseUrl: string = "https://intranet.spi.co.th/booking_car/service/"
 
   constructor(
-    private httpClient: HttpClient,
+    // private httpClient: HttpClient,
     public storage: Storage,
-    public storageGetProvider: StorageGetProvider
+    public storageGetProvider: StorageGetProvider,
+    public httpResponseProvider: HttpResponseProvider,
+    
   ) {
     console.log('Hello LoginProvider Provider');
   }
   
-  loginService(username: string, password: string) {
+  loginService(username: string, password: string ) {
 
-    ////login.ts
-    return new Promise(resolve => {
-      this.httpClient.post(this.baseUrl + 'login.php', { 'username': username, 'password': password }).subscribe(data => {
-
-        resolve(data);
-
-      }, err => {
-        console.log(err);
-      });
-    });
+    return this.httpResponseProvider.HTTPService('login.php',{ 'username': username, 'password': password });
+ 
   }
-
-
 
 }
